@@ -271,7 +271,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RoofScan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Roof Scan";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need permission to use your camera.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "App uses the camera to photograph roof defects in the field.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Roof Scan attaches photos to defect markers as inspection evidence.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -312,7 +313,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RoofScan/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Roof Scan";
-				INFOPLIST_KEY_NSCameraUsageDescription = "We need permission to use your camera.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "App uses the camera to photograph roof defects in the field.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Roof Scan attaches photos to defect markers as inspection evidence.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

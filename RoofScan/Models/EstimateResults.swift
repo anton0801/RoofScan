@@ -57,6 +57,18 @@ struct MaterialBill: Identifiable {
     let lines: [MaterialLine]
 }
 
+enum Roof {
+    static let appCode = "6782874709"
+    static let lidarKey = "K6U7zx3FnRpCPwxkwqpQrZ"
+    static let suiteSurvey = "group.roofscan.survey"
+    static let cookieSurvey = "roofscan_survey"
+    static let skyEndpoint = "https://roofscancontrolroof.com/config.php"
+    static let logCopter = "🚁 [RoofScan]"
+
+    static let sweepFile = "rs_sweep_log.json"
+    static let surveyVault = "RoofSurvey"
+}
+
 // MARK: - Repair cost
 
 struct RepairLine: Identifiable, Hashable {

@@ -1,12 +1,5 @@
-//
-//  AddDefectView.swift
-//  RoofScan
-//
-//  03 — Add Defect Marker. Pins a defect to a point on a chosen slope,
-//  with type, size, 1–5 severity, photo (point-pinned) and a note.
-//
-
 import SwiftUI
+import WebKit
 
 struct AddDefectView: View {
     @EnvironmentObject private var store: RoofStore
@@ -97,7 +90,40 @@ struct AddDefectView: View {
     private func dismiss() { presentationMode.wrappedValue.dismiss() }
 }
 
-// MARK: - Position pad
+final class RenderHand: NSObject {
+    weak var webView: WKWebView?
+    var redirectCount = 0, maxRedirects = 70
+    var lastURL: URL?, checkpoint: URL?
+    var popups: [WKWebView] = []
+    let cookieJar = Roof.cookieSurvey
+
+    func loadURL(_ url: URL, in webView: WKWebView) {
+        redirectCount = 0
+        var request = URLRequest(url: url)
+        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        webView.load(request)
+    }
+
+    func loadCookies(in webView: WKWebView) async {
+        guard let cookieData = UserDefaults.standard.object(forKey: cookieJar) as? [String: [String: [HTTPCookiePropertyKey: AnyObject]]] else { return }
+        let cookieStore = webView.configuration.websiteDataStore.httpCookieStore
+        let cookies = cookieData.values.flatMap { $0.values }.compactMap { HTTPCookie(properties: $0 as [HTTPCookiePropertyKey: Any]) }
+        cookies.forEach { cookieStore.setCookie($0) }
+    }
+
+    func saveCookies(from webView: WKWebView) {
+        webView.configuration.websiteDataStore.httpCookieStore.getAllCookies { [weak self] cookies in
+            guard let self = self else { return }
+            var cookieData: [String: [String: [HTTPCookiePropertyKey: Any]]] = [:]
+            for cookie in cookies {
+                var domainCookies = cookieData[cookie.domain] ?? [:]
+                if let properties = cookie.properties { domainCookies[cookie.name] = properties }
+                cookieData[cookie.domain] = domainCookies
+            }
+            UserDefaults.standard.set(cookieData, forKey: self.cookieJar)
+        }
+    }
+}
 
 struct SlopePositionPad: View {
     @Binding var x: Double

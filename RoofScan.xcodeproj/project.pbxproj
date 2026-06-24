@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8F4EF60F2FE94EC400703C4A /* codemagic.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 8F4EF60E2FE94EC400703C4A /* codemagic.yaml */; };
+		8F4EFB632FEC080100703C4A /* AppsFlyerLib in Frameworks */ = {isa = PBXBuildFile; productRef = 8F4EFB622FEC080100703C4A /* AppsFlyerLib */; };
+		8F4EFB662FEC082700703C4A /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8F4EFB652FEC082700703C4A /* FirebaseCore */; };
+		8F4EFB682FEC082700703C4A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8F4EFB672FEC082700703C4A /* FirebaseMessaging */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F4EFB682FEC082700703C4A /* FirebaseMessaging in Frameworks */,
+				8F4EFB662FEC082700703C4A /* FirebaseCore in Frameworks */,
+				8F4EFB632FEC080100703C4A /* AppsFlyerLib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +90,9 @@
 			);
 			name = RoofScan;
 			packageProductDependencies = (
+				8F4EFB622FEC080100703C4A /* AppsFlyerLib */,
+				8F4EFB652FEC082700703C4A /* FirebaseCore */,
+				8F4EFB672FEC082700703C4A /* FirebaseMessaging */,
 			);
 			productName = RoofScan;
 			productReference = 8F58E9D12FDD6C920063055E /* RoofScan.app */;
@@ -113,6 +122,10 @@
 			);
 			mainGroup = 8F58E9C82FDD6C920063055E;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8F4EFB612FEC080100703C4A /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */,
+				8F4EFB642FEC082700703C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8F58E9D22FDD6C920063055E /* Products */;
 			projectDirPath = "";
@@ -273,6 +286,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Roof Scan";
 				INFOPLIST_KEY_NSCameraUsageDescription = "App uses the camera to photograph roof defects in the field.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Roof Scan attaches photos to defect markers as inspection evidence.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Roof Scan uses tracking data to improve app functionality, enhance performance, analyze feature usage, and support ongoing updates and optimization. This information also helps ensure app reliability, stability, and security while providing a better overall user experience.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -315,6 +329,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "Roof Scan";
 				INFOPLIST_KEY_NSCameraUsageDescription = "App uses the camera to photograph roof defects in the field.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Roof Scan attaches photos to defect markers as inspection evidence.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Roof Scan uses tracking data to improve app functionality, enhance performance, analyze feature usage, and support ongoing updates and optimization. This information also helps ensure app reliability, stability, and security while providing a better overall user experience.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -365,6 +380,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8F4EFB612FEC080100703C4A /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppsFlyerSDK/AppsFlyerFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.18.0;
+			};
+		};
+		8F4EFB642FEC082700703C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.15.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8F4EFB622FEC080100703C4A /* AppsFlyerLib */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F4EFB612FEC080100703C4A /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */;
+			productName = AppsFlyerLib;
+		};
+		8F4EFB652FEC082700703C4A /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F4EFB642FEC082700703C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		8F4EFB672FEC082700703C4A /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F4EFB642FEC082700703C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8F58E9C92FDD6C920063055E /* Project object */;
 }

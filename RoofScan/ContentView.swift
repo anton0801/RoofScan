@@ -10,24 +10,29 @@ import SwiftUI
 
 struct RootRouterView: View {
     @AppStorage("hasCompletedOnboarding") private var hasOnboarded = false
-    @State private var showSplash = true
+    
+    @StateObject private var store = RoofStore()
+    @StateObject private var settings = AppSettings()
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         ZStack {
             Theme.bg.ignoresSafeArea()
 
-            if showSplash {
-                SplashView {
-                    withAnimation(.easeInOut(duration: 0.45)) { showSplash = false }
-                }
-                .transition(.opacity)
-            } else if !hasOnboarded {
+            if !hasOnboarded {
                 OnboardingView()
                     .transition(.move(edge: .trailing).combined(with: .opacity))
             } else {
                 MainTabView()
                     .transition(.opacity)
             }
+        }
+        .environmentObject(store)
+        .environmentObject(settings)
+        .preferredColorScheme(settings.themeMode.colorScheme)
+        .onAppear { store.garbageCollectPhotos() }
+        .onChange(of: scenePhase) { phase in
+            if phase == .background { store.saveNow() }
         }
     }
 }

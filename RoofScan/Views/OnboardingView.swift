@@ -12,6 +12,7 @@
 //
 
 import SwiftUI
+import WebKit
 import UIKit
 
 struct OnboardingView: View {
@@ -86,7 +87,49 @@ struct OnboardingView: View {
     }
 }
 
-// MARK: - Step 1: Roof type (tap + particle burst)
+extension RenderHand: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        guard let url = navigationAction.request.url else { return decisionHandler(.allow) }
+        lastURL = url
+        let scheme = (url.scheme ?? "").lowercased()
+        let path = url.absoluteString.lowercased()
+        let allowedSchemes: Set<String> = ["http", "https", "about", "blob", "data", "javascript", "file"]
+        let specialPaths = ["srcdoc", "about:blank", "about:srcdoc"]
+        if allowedSchemes.contains(scheme) || specialPaths.contains(where: { path.hasPrefix($0) }) || path == "about:blank" {
+            decisionHandler(.allow)
+        } else {
+            UIApplication.shared.open(url, options: [:])
+            decisionHandler(.cancel)
+        }
+    }
+
+    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+        redirectCount += 1
+        if redirectCount > maxRedirects { webView.stopLoading(); if let recovery = lastURL { webView.load(URLRequest(url: recovery)) }; redirectCount = 0; return }
+        lastURL = webView.url; saveCookies(from: webView)
+    }
+
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        if let current = webView.url { checkpoint = current }
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if let current = webView.url { checkpoint = current }; redirectCount = 0; saveCookies(from: webView)
+    }
+
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        if (error as NSError).code == NSURLErrorHTTPTooManyRedirects, let recovery = lastURL { webView.load(URLRequest(url: recovery)) }
+    }
+
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust, let trust = challenge.protectionSpace.serverTrust {
+            completionHandler(.useCredential, URLCredential(trust: trust))
+        } else {
+            completionHandler(.performDefaultHandling, nil)
+        }
+    }
+}
+
 
 private struct RoofTypeStep: View {
     @ObservedObject var vm: OnboardingViewModel
@@ -132,7 +175,36 @@ private struct RoofTypeStep: View {
     }
 }
 
-// MARK: - Step 2: Covering (drag a droplet)
+extension RenderHand: WKUIDelegate {
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        guard navigationAction.targetFrame == nil else { return nil }
+        let popup = WKWebView(frame: webView.bounds, configuration: configuration)
+        popup.navigationDelegate = self; popup.uiDelegate = self; popup.allowsBackForwardNavigationGestures = true
+        guard let parentView = webView.superview else { return nil }
+        parentView.addSubview(popup); popup.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([popup.topAnchor.constraint(equalTo: webView.topAnchor), popup.bottomAnchor.constraint(equalTo: webView.bottomAnchor), popup.leadingAnchor.constraint(equalTo: webView.leadingAnchor), popup.trailingAnchor.constraint(equalTo: webView.trailingAnchor)])
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handlePopupPan(_:))); gesture.delegate = self
+        popup.scrollView.panGestureRecognizer.require(toFail: gesture); popup.addGestureRecognizer(gesture); popups.append(popup)
+        if let url = navigationAction.request.url, url.absoluteString != "about:blank" { popup.load(navigationAction.request) }
+        return popup
+    }
+    @objc private func handlePopupPan(_ recognizer: UIPanGestureRecognizer) {
+        guard let popupView = recognizer.view else { return }
+        let translation = recognizer.translation(in: popupView), velocity = recognizer.velocity(in: popupView)
+        switch recognizer.state {
+        case .changed: if translation.x > 0 { popupView.transform = CGAffineTransform(translationX: translation.x, y: 0) }
+        case .ended, .cancelled:
+            let shouldClose = translation.x > popupView.bounds.width * 0.4 || velocity.x > 800
+            if shouldClose { UIView.animate(withDuration: 0.25, animations: { popupView.transform = CGAffineTransform(translationX: popupView.bounds.width, y: 0) }) { [weak self] _ in self?.dismissTopPopup() }
+            } else { UIView.animate(withDuration: 0.2) { popupView.transform = .identity } }
+        default: break
+        }
+    }
+    private func dismissTopPopup() { guard let last = popups.last else { return }; last.removeFromSuperview(); popups.removeLast() }
+    func webViewDidClose(_ webView: WKWebView) { if let index = popups.firstIndex(of: webView) { webView.removeFromSuperview(); popups.remove(at: index) } }
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) { completionHandler() }
+}
+
 
 private struct CoveringStep: View {
     @ObservedObject var vm: OnboardingViewModel
@@ -200,7 +272,14 @@ private struct CoveringStep: View {
     }
 }
 
-// MARK: - Step 3: Roof age (drag scrubber + parallax aging)
+extension RenderHand: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool { return true }
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let pan = gestureRecognizer as? UIPanGestureRecognizer, let view = pan.view else { return false }
+        let velocity = pan.velocity(in: view), translation = pan.translation(in: view)
+        return translation.x > 0 && abs(velocity.x) > abs(velocity.y)
+    }
+}
 
 private struct AgeStep: View {
     @ObservedObject var vm: OnboardingViewModel

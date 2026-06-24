@@ -11,14 +11,48 @@
 		8F4EFB632FEC080100703C4A /* AppsFlyerLib in Frameworks */ = {isa = PBXBuildFile; productRef = 8F4EFB622FEC080100703C4A /* AppsFlyerLib */; };
 		8F4EFB662FEC082700703C4A /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8F4EFB652FEC082700703C4A /* FirebaseCore */; };
 		8F4EFB682FEC082700703C4A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8F4EFB672FEC082700703C4A /* FirebaseMessaging */; };
+		8F4EFB912FEC1A6E00703C4A /* PushServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8F4EFB8A2FEC1A6E00703C4A /* PushServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8F4EFB992FEC1A7700703C4A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 8F4EFB982FEC1A7700703C4A /* FirebaseMessaging */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8F4EFB8F2FEC1A6E00703C4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F58E9C92FDD6C920063055E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8F4EFB892FEC1A6E00703C4A;
+			remoteInfo = PushServiceExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8F4EFB962FEC1A6E00703C4A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8F4EFB912FEC1A6E00703C4A /* PushServiceExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8F4EF60E2FE94EC400703C4A /* codemagic.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = codemagic.yaml; sourceTree = "<group>"; };
+		8F4EFB8A2FEC1A6E00703C4A /* PushServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PushServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F58E9D12FDD6C920063055E /* RoofScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoofScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8F4EFB952FEC1A6E00703C4A /* Exceptions for "PushServiceExtension" folder in "PushServiceExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8F4EFB892FEC1A6E00703C4A /* PushServiceExtension */;
+		};
 		8F58E9E12FDD6CBA0063055E /* Exceptions for "RoofScan" folder in "RoofScan" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -29,6 +63,14 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		8F4EFB8B2FEC1A6E00703C4A /* PushServiceExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8F4EFB952FEC1A6E00703C4A /* Exceptions for "PushServiceExtension" folder in "PushServiceExtension" target */,
+			);
+			path = PushServiceExtension;
+			sourceTree = "<group>";
+		};
 		8F58E9D32FDD6C920063055E /* RoofScan */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -40,6 +82,14 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8F4EFB872FEC1A6E00703C4A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8F4EFB992FEC1A7700703C4A /* FirebaseMessaging in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8F58E9CE2FDD6C920063055E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -53,11 +103,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F4EFB972FEC1A7700703C4A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8F58E9C82FDD6C920063055E = {
 			isa = PBXGroup;
 			children = (
 				8F4EF60E2FE94EC400703C4A /* codemagic.yaml */,
 				8F58E9D32FDD6C920063055E /* RoofScan */,
+				8F4EFB8B2FEC1A6E00703C4A /* PushServiceExtension */,
+				8F4EFB972FEC1A7700703C4A /* Frameworks */,
 				8F58E9D22FDD6C920063055E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				8F58E9D12FDD6C920063055E /* RoofScan.app */,
+				8F4EFB8A2FEC1A6E00703C4A /* PushServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,6 +133,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8F4EFB892FEC1A6E00703C4A /* PushServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8F4EFB922FEC1A6E00703C4A /* Build configuration list for PBXNativeTarget "PushServiceExtension" */;
+			buildPhases = (
+				8F4EFB862FEC1A6E00703C4A /* Sources */,
+				8F4EFB872FEC1A6E00703C4A /* Frameworks */,
+				8F4EFB882FEC1A6E00703C4A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8F4EFB8B2FEC1A6E00703C4A /* PushServiceExtension */,
+			);
+			name = PushServiceExtension;
+			packageProductDependencies = (
+				8F4EFB982FEC1A7700703C4A /* FirebaseMessaging */,
+			);
+			productName = PushServiceExtension;
+			productReference = 8F4EFB8A2FEC1A6E00703C4A /* PushServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		8F58E9D02FDD6C920063055E /* RoofScan */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F58E9DD2FDD6C940063055E /* Build configuration list for PBXNativeTarget "RoofScan" */;
@@ -80,10 +163,12 @@
 				8F58E9CD2FDD6C920063055E /* Sources */,
 				8F58E9CE2FDD6C920063055E /* Frameworks */,
 				8F58E9CF2FDD6C920063055E /* Resources */,
+				8F4EFB962FEC1A6E00703C4A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8F4EFB902FEC1A6E00703C4A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				8F58E9D32FDD6C920063055E /* RoofScan */,
@@ -108,6 +193,9 @@
 				LastSwiftUpdateCheck = 1640;
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
+					8F4EFB892FEC1A6E00703C4A = {
+						CreatedOnToolsVersion = 16.4;
+					};
 					8F58E9D02FDD6C920063055E = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -132,11 +220,19 @@
 			projectRoot = "";
 			targets = (
 				8F58E9D02FDD6C920063055E /* RoofScan */,
+				8F4EFB892FEC1A6E00703C4A /* PushServiceExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8F4EFB882FEC1A6E00703C4A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8F58E9CF2FDD6C920063055E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,6 +244,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8F4EFB862FEC1A6E00703C4A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8F58E9CD2FDD6C920063055E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -157,7 +260,76 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8F4EFB902FEC1A6E00703C4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8F4EFB892FEC1A6E00703C4A /* PushServiceExtension */;
+			targetProxy = 8F4EFB8F2FEC1A6E00703C4A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		8F4EFB932FEC1A6E00703C4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PushServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PushServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scanninginroff.RoofScan.PushServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8F4EFB942FEC1A6E00703C4A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PushServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PushServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.scanninginroff.RoofScan.PushServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		8F58E9DB2FDD6C940063055E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -301,7 +473,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.00.00;
 				PRODUCT_BUNDLE_IDENTIFIER = com.scanninginroff.RoofScan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -344,7 +516,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.3;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 2.00.00;
 				PRODUCT_BUNDLE_IDENTIFIER = com.scanninginroff.RoofScan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -361,6 +533,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8F4EFB922FEC1A6E00703C4A /* Build configuration list for PBXNativeTarget "PushServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8F4EFB932FEC1A6E00703C4A /* Debug */,
+				8F4EFB942FEC1A6E00703C4A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8F58E9CC2FDD6C920063055E /* Build configuration list for PBXProject "RoofScan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -412,6 +593,11 @@
 			productName = FirebaseCore;
 		};
 		8F4EFB672FEC082700703C4A /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8F4EFB642FEC082700703C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		8F4EFB982FEC1A7700703C4A /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8F4EFB642FEC082700703C4A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;

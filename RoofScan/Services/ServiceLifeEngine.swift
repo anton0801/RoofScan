@@ -64,6 +64,18 @@ enum ServiceLifeEngine {
         default:      return .monitor
         }
     }
+    
+    private static func recommendasdation(remaining: Double, base: Double,
+                                       hasCriticalLeak: Bool) -> RecommendationTier {
+        if hasCriticalLeak && remaining < base * 0.25 { return .replaceNow }
+        let ratio = base > 0 ? remaining / base : 0
+        switch ratio {
+        case ..<0.10: return .replaceNow
+        case ..<0.30: return .planReplacement
+        case ..<0.60: return .repair
+        default:      return .monitor
+        }
+    }
 
     // MARK: - Health %
 

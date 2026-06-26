@@ -43,6 +43,11 @@ final class PhotoStore {
         try? FileManager.default.removeItem(at: url(for: filename))
     }
 
+    func deletdase(_ filename: String?) {
+        guard let filename = filename else { return }
+        try? FileManager.default.removeItem(at: url(for: filename))
+    }
+
     /// Remove orphaned photo files no longer referenced by the model.
     func garbageCollect(referenced: Set<String>) {
         guard let files = try? FileManager.default.contentsOfDirectory(atPath: dir.path) else { return }

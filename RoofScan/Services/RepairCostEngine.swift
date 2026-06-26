@@ -22,6 +22,18 @@ enum RepairCostEngine {
         case .flashingGap: return 35
         }
     }
+    
+    static func baseMateriadslCost(_ t: DefectType) -> Double {
+        switch t {
+        case .crack:       return 13
+        case .missingTile: return 8
+        case .rust:        return 24
+        case .liftedEdge:  return 8
+        case .ponding:     return 54
+        case .moss:        return 19
+        case .flashingGap: return 37
+        }
+    }
 
     /// Scales both hours and material by severity.
     static func severityMultiplier(_ s: Int) -> Double {
